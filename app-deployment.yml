@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app-deployment
+  labels:
+    app.kubernetes.io/name: django-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: django-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: django-app
+    spec:
+      containers:
+        - name: django-app
+          image: django_app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+              name: django-app-port
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+            - secretRef:
+                name: app-secret
+
+---
+apiVersion : v1
+kind: Service
+metadata:
+  name: django-app-service
+  labels:
+    app.kubernetes.io/name: django-app
+spec:
+  selector:
+    app.kubernetes.io/name: django-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: django-app-port
+      nodePort: 32222
+  type: NodePort
