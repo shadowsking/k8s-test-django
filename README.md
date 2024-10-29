@@ -101,3 +101,8 @@ kubectl apply -f app-deployment.yml
 ```bash
 kubectl apply -f app-ingress.yml
 ```
+
+### Создайте регулярное удаление сессии
+```bash
+kubectl apply -f app-clearsessions.yml
+```
