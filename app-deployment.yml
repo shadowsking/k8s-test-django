@@ -41,5 +41,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: django-app-port
-      nodePort: 32222
-  type: NodePort
+  type: ClusterIP

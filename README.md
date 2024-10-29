@@ -76,8 +76,10 @@ $ docker compose build web
 
 `DATABASE_URL` -- адрес для подключения к базе данных PostgreSQL. Другие СУБД сайт не поддерживает. [Формат записи](https://github.com/jacobian/dj-database-url#url-schema).
 
+## Kubernates
+Развертывание приложения с помощью kubernates
 
-### Secret
+### Создайте Secret
 Сконвертить и заполнить поля в app-secret.yml значением формата base64:
 - `SECRET_KEY`
 - `DATABASE_URL`
@@ -88,4 +90,14 @@ echo SECRET_KEY | base64
 Далее выполнить команду:
 ```bash
 kubectl apply -f app-secret.yml
+```
+
+### Создайте Deployment и Service 
+```bash
+kubectl apply -f app-deployment.yml
+```
+
+### Создайте Ingress
+```bash
+kubectl apply -f app-ingress.yml
 ```
