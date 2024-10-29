@@ -106,3 +106,8 @@ kubectl apply -f app-ingress.yml
 ```bash
 kubectl apply -f app-clearsessions.yml
 ```
+
+### Создайте миграцию
+```bash
+kubectl apply -f app-migrate.yml
+```

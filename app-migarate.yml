@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-app-migrate
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+        - name: django-app
+          image: django_app:latest
+          imagePullPolicy: IfNotPresent
+          command: ["python", "manage.py", "migrate",  "--noinput"]
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+            - secretRef:
+                name: app-secret
+      restartPolicy: Never
