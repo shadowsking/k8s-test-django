@@ -79,6 +79,11 @@ $ docker compose build web
 ## Kubernates
 Развертывание приложения с помощью kubernates
 
+### Запустите Minikube
+```bash
+minikube start --driver=virtualbox --no-vtx-check
+```
+
 ### Создайте Secret
 Сконвертить и заполнить поля в app-secret.yml значением формата base64:
 - `SECRET_KEY`
@@ -100,6 +105,11 @@ kubectl apply -f app-deployment.yml
 ### Создайте Ingress
 ```bash
 kubectl apply -f app-ingress.yml
+```
+
+Включение Ingress в Minikube:
+```bash
+minikube addons enable ingress
 ```
 
 ### Создайте регулярное удаление сессии
