@@ -94,17 +94,17 @@ echo SECRET_KEY | base64
 ```
 Далее выполнить команду:
 ```bash
-kubectl apply -f app-secret.yml
+kubectl apply -f kubernetes/app-secret.yml
 ```
 
 ### Создайте Deployment и Service 
 ```bash
-kubectl apply -f app-deployment.yml
+kubectl apply -f kubernetes/app-deployment.yml
 ```
 
 ### Создайте Ingress
 ```bash
-kubectl apply -f app-ingress.yml
+kubectl apply -f kubernetes/app-ingress.yml
 ```
 
 Включение Ingress в Minikube:
@@ -114,10 +114,10 @@ minikube addons enable ingress
 
 ### Создайте регулярное удаление сессии
 ```bash
-kubectl apply -f app-clearsessions.yml
+kubectl apply -f kubernetes/app-clearsessions.yml
 ```
 
 ### Создайте миграцию
 ```bash
-kubectl apply -f app-migrate.yml
+kubectl apply -f kubernetes/app-migrate.yml
 ```
