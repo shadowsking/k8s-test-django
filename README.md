@@ -97,9 +97,14 @@ echo SECRET_KEY | base64
 kubectl apply -f kubernetes/app-secret.yml
 ```
 
-### Создайте Deployment и Service 
+### Создайте Deployment
 ```bash
 kubectl apply -f kubernetes/app-deployment.yml
+```
+
+### Создайте Service 
+```bash
+kubectl apply -f kubernetes/app-service.yml
 ```
 
 ### Создайте Ingress

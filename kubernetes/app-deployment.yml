@@ -26,19 +26,3 @@ spec:
                 name: app-configmap
             - secretRef:
                 name: app-secret
-
----
-apiVersion : v1
-kind: Service
-metadata:
-  name: django-app-service
-  labels:
-    app.kubernetes.io/name: django-app
-spec:
-  selector:
-    app.kubernetes.io/name: django-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: django-app-port
-  type: ClusterIP
