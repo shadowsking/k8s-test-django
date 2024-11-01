@@ -84,6 +84,17 @@ $ docker compose build web
 minikube start --driver=virtualbox --no-vtx-check
 ```
 
+Установите [Helm](https://helm.sh/).
+
+Разворачиваем [postgreSQL](https://habr.com/ru/companies/domclick/articles/649167/) в кластере:
+```bash
+source kubernetes/bitnami_psql.sh
+```
+или
+```bash
+source kubernetes/bitnami_psql.sh <USER> <PASSWORD> <DB_NAME>
+```
+
 ### Создайте Secret
 Сконвертить и заполнить поля в app-secret.yml значением формата base64:
 - `SECRET_KEY`
