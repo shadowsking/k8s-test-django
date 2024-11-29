@@ -151,4 +151,7 @@ export TAG=<your tag>
 ```bash
 docker tag django_app:latest shadowsking/django_app:$TAG
 docker push shadowsking/django_app:$TAG
+
+docker tag django_app:latest shadowsking/django_app:latest
+docker push shadowsking/django_app:latest
 ```
