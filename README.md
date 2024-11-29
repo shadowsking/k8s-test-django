@@ -139,6 +139,9 @@ kubectl apply -f kubernetes/app-migrate.yml
 ```
 
 ## Yandex Cloud
+- [Рабочая версия сайта](https://edu-mad-jang.sirius-k8s.dvmn.org)
+- [Серверная инфраструктура](https://sirius-env-registry.website.yandexcloud.net/edu-mad-jang.html)
+
 Настройте namespace:
 ```bash
 kubectl config set-context --current --namespace=edu-mad-jang
