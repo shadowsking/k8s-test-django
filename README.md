@@ -137,3 +137,18 @@ kubectl apply -f kubernetes/app-clearsessions.yml
 ```bash
 kubectl apply -f kubernetes/app-migrate.yml
 ```
+
+## Docker Registry
+
+### Сборка
+```bash
+docker build .\backend_main_django -t django_app
+```
+### Публикация
+```bash
+export TAG=<your tag>
+```
+```bash
+docker tag django_app:latest shadowsking/django_app:$TAG
+docker push shadowsking/django_app:$TAG
+```
