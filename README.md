@@ -1,6 +1,6 @@
 # Django Site
 
-Докеризированный сайт на Django для экспериментов с Kubernetes.
+[Докеризированный сайт на Django](https://edu-mad-jang.sirius-k8s.dvmn.org) для экспериментов с Kubernetes.
 
 Внутри контейнера Django приложение запускается с помощью Nginx Unit, не путать с Nginx. Сервер Nginx Unit выполняет сразу две функции: как веб-сервер он раздаёт файлы статики и медиа, а в роли сервера-приложений он запускает Python и Django. Таким образом Nginx Unit заменяет собой связку из двух сервисов Nginx и Gunicorn/uWSGI. [Подробнее про Nginx Unit](https://unit.nginx.org/).
 
@@ -136,4 +136,71 @@ kubectl apply -f kubernetes/app-clearsessions.yml
 ### Создайте миграцию
 ```bash
 kubectl apply -f kubernetes/app-migrate.yml
+```
+
+## Yandex Cloud
+Настройте namespace:
+```bash
+kubectl config set-context --current --namespace=edu-mad-jang
+```
+### Создайте Secret
+Сконвертить и заполнить поля в app-secret.yml значением формата base64:
+- `SECRET_KEY`
+- `DATABASE_URL`
+
+```bash
+echo SECRET_KEY | base64
+```
+Далее выполнить команду:
+```bash
+kubectl apply -f dev/app-secret.yml
+```
+### Создайте ConfigMap
+```bash
+kubectl apply -f dev/app-configmap.yml
+```
+### Создайте Deployment
+```bash
+kubectl apply -f dev/app-deployment.yml
+```
+### Создайте Service 
+```bash
+kubectl apply -f dev/app-service.yml
+```
+### Создайте регулярное удаление сессии
+```bash
+kubectl apply -f dev/app-clearsessions.yml
+```
+### Создайте миграцию
+```bash
+kubectl apply -f dev/app-migrate.yml
+```
+### Создайте учетную запись
+```bash
+kubectl get pods
+```
+Скопируйте любой активный Pod, название которого начинается на "django-app-deployment"
+```bash
+kubectl exec -it <POD> -- bash
+```
+```bash
+python manage.py createsuperuser
+```
+
+## Docker Registry
+
+### Сборка
+```bash
+docker build .\backend_main_django -t django_app
+```
+### Публикация
+```bash
+export TAG=<your tag>
+```
+```bash
+docker tag django_app:latest shadowsking/django_app:$TAG
+docker push shadowsking/django_app:$TAG
+
+docker tag django_app:latest shadowsking/django_app:latest
+docker push shadowsking/django_app:latest
 ```

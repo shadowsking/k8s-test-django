@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app-deployment
+  namespace: edu-mad-jang
+  labels:
+    app.kubernetes.io/name: django-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: django-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: django-app
+    spec:
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: pg-root-cert
+            defaultMode: 0600
+      containers:
+        - name: django-app
+          image: shadowsking/django_app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: django-app-port
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+            - secretRef:
+                name: app-secret
+          volumeMounts:
+            - name: secret-volume
+              readOnly: true
+              mountPath: "/root/.postgresql"

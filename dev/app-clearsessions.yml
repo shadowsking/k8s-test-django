@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: django-app-clearsessions
+spec:
+  schedule: "* * 1 * *"
+  startingDeadlineSeconds: 60
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 120
+      template:
+        spec:
+          containers:
+            - name: django-app
+              image: shadowsking/django_app:latest
+              imagePullPolicy: IfNotPresent
+              command: [ "python", "manage.py", "clearsessions" ]
+              envFrom:
+                - configMapRef:
+                    name: app-configmap
+                - secretRef:
+                    name: app-secret
+          restartPolicy: Never

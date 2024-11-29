@@ -1,0 +1,16 @@
+apiVersion : v1
+kind: Service
+metadata:
+  name: django-app-service
+  namespace: edu-mad-jang
+  labels:
+    app.kubernetes.io/name: django-app
+spec:
+  selector:
+    app.kubernetes.io/name: django-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: django-app-port
+      nodePort: 30361
+  type: NodePort
