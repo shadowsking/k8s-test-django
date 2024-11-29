@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: django-app
-          image: django_app:latest
+          image: shadowsking/django_app:latest
           imagePullPolicy: IfNotPresent
           command: ["python", "manage.py", "migrate",  "--noinput"]
           envFrom:
